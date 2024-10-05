@@ -1,4 +1,4 @@
-version: '3.8'  # Убедитесь, что указана версия
+version: '3.8'
 
 services:
   app:
@@ -10,10 +10,10 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: mydb
       DATABASE_URL: postgres://postgres:password@db:5432/mydb
-      REDIS_URL: redis://redis:6379  # Добавлено
+      REDIS_URL: redis://redis:6379
     depends_on:
       - db
-      - redis  # Добавлено
+      - redis
 
   db:
     image: postgres:14
@@ -25,9 +25,9 @@ services:
       - "5433:5432"
 
   redis:
-    image: redis:latest  # Добавлено для Redis
+    image: redis:latest
     ports:
-      - "6379:6379"  # Порт Redis
+      - "6379:6379"
 
   adminer:
     image: adminer
