@@ -1,0 +1,35 @@
+version: '3.8'  # Убедитесь, что указана версия
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+      DATABASE_URL: postgres://postgres:password@db:5432/mydb
+      REDIS_URL: redis://redis:6379  # Добавлено
+    depends_on:
+      - db
+      - redis  # Добавлено
+
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+    ports:
+      - "5433:5432"
+
+  redis:
+    image: redis:latest  # Добавлено для Redis
+    ports:
+      - "6379:6379"  # Порт Redis
+
+  adminer:
+    image: adminer
+    ports:
+      - "8080:8080"
